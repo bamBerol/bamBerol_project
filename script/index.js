@@ -1,6 +1,6 @@
 document.addEventListener("DOMContentLoaded", () => {
+  const logo = document.querySelector(".logo");
   const categories = document.querySelector(".categories");
-  const categoryCard = document.querySelector(".categoryCard");
 
   CATEGORIES_URL = "https://www.themealdb.com/api/json/v1/1/categories.php";
 
@@ -20,24 +20,25 @@ document.addEventListener("DOMContentLoaded", () => {
     let categoryCard = document.createElement("div");
     categoryCard.setAttribute("id", `${category.idCategory}`);
     categoryCard.classList.add("categoryCard");
-    //console.log(categoryCard);
-    categories.appendChild(categoryCard);
-    cardTitle(category);
 
-    //console.log(document.getElementsByClassName(".categories"));
-  };
-
-  let cardTitle = (category) => {
-    console.log(category.strCategory);
     let categoryTitle = document.createElement("div");
     categoryTitle.classList.add("categoryTitle");
     let h2 = document.createElement("h2");
     h2.innerHTML = category.strCategory;
 
+    let categoryPhoto = document.createElement("div");
+    categoryPhoto.classList.add("categoryPhoto");
+
+    let categoryImg = document.createElement("img");
+    categoryImg.src = `${category.strCategoryThumb}`;
+    categoryImg.alt = `${category.strCategory} photo`;
+
+    categoryPhoto.appendChild(categoryImg);
+
+    categoryCard.appendChild(categoryPhoto);
+    categoryTitle.appendChild(h2);
+    categoryCard.appendChild(categoryTitle);
+    categories.appendChild(categoryCard);
     console.log(categoryCard);
-    /*categoryTitle.appendChild(h2);
-    categoryCard.appendChild(cardTitle);
-    console.log(cardTitle);
-    */
   };
 });

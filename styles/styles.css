@@ -4,19 +4,38 @@
   box-sizing: border-box;
   font-size: 20px;
 }
-body {
+
+.container {
+  display: flex;
+  height: 100vh;
+  width: 100%;
   background-image: url("../images/foodiesfeed.com_messy-pizza-on-a-black-table.jpg");
   background-repeat: no-repeat;
   background-size: cover;
-}
-.container {
-  height: 100vh;
-  width: 100%;
-  display: flex;
   align-items: center;
   justify-content: center;
   color: #fff;
 }
-.container h1 {
+
+.logo {
+  display: none;
   font-size: 3rem;
+}
+
+.activities {
+  height: 80%;
+  width: 90%;
+  background-color: #fff;
+  /*opacity: 0.6;*/
+  border-radius: 1rem;
+  overflow: scroll;
+}
+
+.categories {
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+  justify-content: space-around;
+  height: 100%;
+  width: 100%;
 }
