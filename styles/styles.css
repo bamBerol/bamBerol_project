@@ -2,40 +2,100 @@
   margin: 0;
   padding: 0;
   box-sizing: border-box;
+}
+
+html {
+  scroll-behavior: smooth;
+}
+
+body {
+  font-family: "Source Sans Pro", sans-serif;
   font-size: 20px;
+}
+
+body::-webkit-scrollbar {
+  display: none;
+}
+
+:root {
+  --white: aliceblue;
+}
+
+.background {
+  background-image: url("../images/foodiesfeed.com_messy-pizza-on-a-black-table.jpg");
+  background-repeat: no-repeat;
+  background-size: cover;
 }
 
 .container {
   display: flex;
+
   height: 100vh;
   width: 100%;
-  background-image: url("../images/foodiesfeed.com_messy-pizza-on-a-black-table.jpg");
-  background-repeat: no-repeat;
-  background-size: cover;
+  padding: 1rem 2rem;
   align-items: center;
   justify-content: center;
-  color: #fff;
+  /*background-color: rgba(0, 0, 0, 0.3);*/
 }
 
 .logo {
-  display: none;
+  width: 100%;
+  padding: 1rem 2rem;
+  position: fixed;
   font-size: 3rem;
+  color: var(--white);
+  background-color: rgba(0, 0, 0, 0.9);
+  font-weight: 700;
+  font-style: italic;
 }
 
 .activities {
   height: 80%;
   width: 90%;
-  background-color: #fff;
-  /*opacity: 0.6;*/
-  border-radius: 1rem;
   overflow: scroll;
+}
+
+.activities::-webkit-scrollbar {
+  display: none;
 }
 
 .categories {
   display: flex;
+  height: 100%;
+  width: 100%;
   flex-direction: row;
   flex-wrap: wrap;
   justify-content: space-around;
-  height: 100%;
-  width: 100%;
+}
+
+.categoryCard {
+  display: flex;
+  padding: 1.5rem 1rem;
+  margin: 1.5rem 0;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  background-color: rgba(255, 255, 255, 0.9);
+  border-radius: 2rem;
+}
+
+.categoryPhoto {
+  padding-top: 1.5rem;
+}
+
+.categoryTitle {
+  padding: 1.5rem 1rem;
+  font-size: 2rem;
+  font-weight: 700;
+}
+
+footer p {
+  display: flex;
+  padding: 1rem 2rem;
+  align-items: center;
+  justify-content: center;
+  color: var(--white);
+  background-color: rgba(0, 0, 0, 0.7);
+  font-size: 1rem;
+  font-weight: 200;
 }
