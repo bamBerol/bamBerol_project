@@ -1,6 +1,7 @@
 document.addEventListener("DOMContentLoaded", () => {
   const logo = document.querySelector(".logo");
   const categories = document.querySelector(".categories");
+  const element = document.querySelector(".background");
 
   CATEGORIES_URL = "https://www.themealdb.com/api/json/v1/1/categories.php";
 
@@ -41,4 +42,8 @@ document.addEventListener("DOMContentLoaded", () => {
     categories.appendChild(categoryCard);
     console.log(categoryCard);
   };
+
+  window.addEventListener("scroll", (event) => {
+    console.log(window.scrollY);
+  });
 });
