@@ -1,11 +1,20 @@
 document.addEventListener("DOMContentLoaded", () => {
   const logo = document.querySelector(".logo");
   const categories = document.querySelector(".categories");
-  const element = document.querySelector(".background");
+  const welcomeDiv = document.querySelector(".welcome");
+  const mainView = document.querySelector(".mainView");
+  const activitiesCategories = document.querySelector(".activitiesCategories");
+  const activitiesSearch = document.querySelector(".activitiesSearch");
+  const footerText = document.querySelector(".footerText");
 
   CATEGORIES_URL = "https://www.themealdb.com/api/json/v1/1/categories.php";
 
+  const date = new Date();
+  let year = date.getFullYear();
+  footerText.innerHTML = `&copy; devTro ${year} All Rights Reserved.`;
+
   //* DOWNLOADS CATEGORIES FROM API
+
   fetch(CATEGORIES_URL)
     .then((res) => res.json())
     .then((data) => {
@@ -16,6 +25,7 @@ document.addEventListener("DOMContentLoaded", () => {
     });
 
   //* CREATE CARD FOR EVERY CATEGORY
+
   let createCard = (category) => {
     //console.log(category);
     let categoryCard = document.createElement("div");
@@ -40,10 +50,30 @@ document.addEventListener("DOMContentLoaded", () => {
     categoryTitle.appendChild(h2);
     categoryCard.appendChild(categoryTitle);
     categories.appendChild(categoryCard);
-    console.log(categoryCard);
+    //console.log(categoryCard);
   };
 
-  window.addEventListener("scroll", (event) => {
-    console.log(window.scrollY);
+  //* Hide welcome div
+
+  welcomeDiv.addEventListener(
+    "click",
+    (showMainView = () => {
+      console.log("welcome click, main view showed");
+      console.log(welcomeDiv.classList.contains("divOff"));
+      if (welcomeDiv.className !== "divOff") {
+        welcomeDiv.classList.remove("divOn");
+        welcomeDiv.classList.add("divOff");
+        mainView.classList.remove("divOff");
+        mainView.classList.add("divOn");
+      } else {
+      }
+    })
+  );
+
+  activitiesCategories.addEventListener("click", () => {
+    console.log("categories clicked");
+  });
+  activitiesSearch.addEventListener("click", () => {
+    console.log("search clicked");
   });
 });

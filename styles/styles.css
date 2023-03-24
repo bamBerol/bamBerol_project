@@ -6,11 +6,11 @@
 
 html {
   scroll-behavior: smooth;
+  font-size: 20px;
 }
 
 body {
   font-family: "Source Sans Pro", sans-serif;
-  font-size: 20px;
 }
 
 body::-webkit-scrollbar {
@@ -18,102 +18,132 @@ body::-webkit-scrollbar {
 }
 
 :root {
-  --logo: #ffbf25;
-  --cardTitle: #042d58;
-  --footer: aliceblue;
+  --yellow: #ffbf25;
+  --blue: #042d58;
+  --grey: #d6dfe1;
+  --red: #fc493e;
+  --main: rgba(0, 0, 0, 0.5);
+  --backgroundTopBottom: rgb(0, 0, 0);
+}
+
+.centerFlex {
+  display: flex;
+  align-content: center;
+  justify-content: center;
 }
 
 .background {
-  position: relative;
+  width: 100%;
+  height: 100vh;
   background-image: url("../images/foodiesfeed.com_messy-pizza-on-a-black-table.jpg");
   background-repeat: no-repeat;
   background-size: cover;
-  overflow-y: auto;
 }
 
-footer,
-.container {
-  position: absolute;
+.welcome,
+.mainView {
   width: 100%;
-}
-
-.logo {
-  width: 100%;
-  padding: 1rem 2rem;
-  position: fixed;
-  font-size: 3rem;
-  color: var(--logo);
-  background-color: rgba(0, 0, 0, 0.9);
-  font-weight: 700;
-  font-style: italic;
-  z-index: 10;
-}
-
-.container {
-  display: flex;
-  /*height: 100vh;*/
-  width: 100%;
-  padding: 1rem 2rem;
-  align-items: center;
-  justify-content: center;
-  position: relative;
-}
-
-.activities {
-  /*height: 80%;*/
-  width: 90%;
-  overflow: scroll;
-}
-
-.activities::-webkit-scrollbar {
-  display: none;
-}
-
-.categories {
-  display: flex;
-  height: 100%;
-  width: 100%;
-  flex-direction: row;
-  flex-wrap: wrap;
-  justify-content: space-around;
-}
-
-.categoryCard {
-  display: flex;
-  padding: 1.5rem 1rem;
-  margin: 1.5rem 0;
+  height: 100vh;
   flex-direction: column;
   align-items: center;
   justify-content: center;
-  background-color: rgba(214, 223, 225, 0.9);
-  border-radius: 1rem;
+  background-color: var(--main);
 }
 
-.categoryCard:hover {
+.welcome {
   cursor: pointer;
 }
 
-.categoryPhoto {
-  padding-top: 1.5rem;
+.welcomeLogo {
+  font-size: 6rem;
+  text-align: center;
+  color: var(--yellow);
 }
 
-.categoryTitle {
-  padding: 1.5rem 1rem;
-  color: var(--cardTitle);
+.welcomeLogoDivInfo p {
+  padding: 0.5rem 1rem;
+  font-size: 1.5rem;
+  color: var(--red);
+}
+
+.top {
+  position: absolute;
+  width: 100%;
+  padding: 1.2rem 1rem;
+  top: 0;
+  background-color: var(--backgroundTopBottom);
+}
+
+.headerLogo {
   font-size: 2rem;
-  font-weight: 700;
-}
-footer {
-  background-color: rgba(0, 0, 0, 0.7);
-  bottom: 0;
+  font-style: italic;
+  color: var(--yellow);
 }
 
-footer p {
+.container,
+.activities,
+.activitiesOption {
+  width: 100%;
+}
+.activities {
+  flex-direction: column;
+  height: 80%;
+}
+
+.activitiesTitle {
+  padding: 3rem 0;
+  font-size: 2.5rem;
+  font-weight: bold;
+  color: var(--red);
+}
+
+.activitiesSearch,
+.activitiesCategories {
   display: flex;
-  padding: 1rem 2rem;
   align-items: center;
   justify-content: center;
-  color: var(--footer);
-  font-size: 1rem;
-  font-weight: 200;
+  height: 300px;
+  width: 400px;
+  margin: 1rem 0;
+  font-size: 2rem;
+  font-style: italic;
+  color: var(--red);
+  background-color: rgba(214, 223, 225, 0.85);
+  border-radius: 0.5rem;
+}
+
+.activitiesSearch:hover,
+.activitiesCategories:hover {
+  cursor: pointer;
+}
+
+.activitiesOption {
+  flex-direction: row;
+  justify-content: space-evenly;
+}
+
+.categories {
+  display: none;
+}
+
+.bottom {
+  display: flex;
+  width: 100%;
+  position: absolute;
+  padding: 1.2rem 1rem;
+  bottom: 0;
+  color: var(--grey);
+  background-color: var(--backgroundTopBottom);
+}
+
+.footerText {
+  font-size: 0.7rem;
+}
+
+.divOn {
+  display: flex;
+}
+
+.divOff {
+  display: none;
 }
