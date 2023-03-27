@@ -5,6 +5,7 @@ document.addEventListener("DOMContentLoaded", () => {
   const mainView = document.querySelector(".mainView");
   const activitiesCategories = document.querySelector(".activitiesCategories");
   const activitiesSearch = document.querySelector(".activitiesSearch");
+  const activities = document.querySelector(".activities");
   const footerText = document.querySelector(".footerText");
 
   CATEGORIES_URL = "https://www.themealdb.com/api/json/v1/1/categories.php";
@@ -72,8 +73,12 @@ document.addEventListener("DOMContentLoaded", () => {
 
   activitiesCategories.addEventListener("click", () => {
     console.log("categories clicked");
+    activities.classList.add("divOff");
+    categories.classList.remove("divOff");
+    categories.classList.add("divOn");
   });
   activitiesSearch.addEventListener("click", () => {
     console.log("search clicked");
+    activities.classList.add("divOff");
   });
 });

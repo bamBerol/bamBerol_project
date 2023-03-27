@@ -62,15 +62,13 @@ body::-webkit-scrollbar {
 
 .welcomeLogoDivInfo p {
   padding: 0.5rem 1rem;
-  font-size: 1.5rem;
+  font-size: 1rem;
   color: var(--red);
 }
 
 .top {
-  position: absolute;
   width: 100%;
   padding: 1.2rem 1rem;
-  top: 0;
   background-color: var(--backgroundTopBottom);
 }
 
@@ -84,10 +82,12 @@ body::-webkit-scrollbar {
 .activities,
 .activitiesOption {
   width: 100%;
+  height: 100%;
 }
+
 .activities {
   flex-direction: column;
-  height: 80%;
+  padding: 1.2rem 1rem;
 }
 
 .activitiesTitle {
@@ -107,7 +107,7 @@ body::-webkit-scrollbar {
   margin: 1rem 0;
   font-size: 2rem;
   font-style: italic;
-  color: var(--red);
+  color: var(--blue);
   background-color: rgba(214, 223, 225, 0.85);
   border-radius: 0.5rem;
 }
@@ -119,19 +119,21 @@ body::-webkit-scrollbar {
 
 .activitiesOption {
   flex-direction: row;
+  align-items: center;
   justify-content: space-evenly;
 }
 
 .categories {
-  display: none;
+  width: 100%;
+  height: auto;
+  padding: 1.2rem 1rem;
+  flex-wrap: wrap;
+  overflow-y: scroll;
 }
 
 .bottom {
-  display: flex;
   width: 100%;
-  position: absolute;
   padding: 1.2rem 1rem;
-  bottom: 0;
   color: var(--grey);
   background-color: var(--backgroundTopBottom);
 }
