@@ -166,8 +166,27 @@ body {
 }
 
 .search {
+  display: flex;
   width: 100%;
   flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+.searchTitle {
+  font-size: 2rem;
+  padding: 1rem;
+  color: var(--grey);
+}
+
+.searchInput {
+  width: 100%;
+}
+
+.inputSearch {
+  padding: 0.5rem 2rem;
+  /*margin: 1.5rem;*/
+  border-radius: 1.5rem;
+  font-size: 1rem;
 }
 
 .bottom {
