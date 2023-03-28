@@ -6,6 +6,7 @@ document.addEventListener("DOMContentLoaded", () => {
   const activitiesCategories = document.querySelector(".activitiesCategories");
   const activitiesSearch = document.querySelector(".activitiesSearch");
   const activities = document.querySelector(".activities");
+  const catCard = document.querySelector(".categoryCard");
   const footerText = document.querySelector(".footerText");
 
   CATEGORIES_URL = "https://www.themealdb.com/api/json/v1/1/categories.php";
@@ -25,16 +26,18 @@ document.addEventListener("DOMContentLoaded", () => {
       });
     });
 
-  //* CREATE CARD FOR EVERY CATEGORY
+  //* CREATE CARDS FOR CATEGORIES
 
   let createCard = (category) => {
     //console.log(category);
     let categoryCard = document.createElement("div");
     categoryCard.setAttribute("id", `${category.idCategory}`);
     categoryCard.classList.add("categoryCard");
+    categoryCard.classList.add("centerFlex");
 
     let categoryTitle = document.createElement("div");
     categoryTitle.classList.add("categoryTitle");
+    categoryTitle.classList.add("centerFlex");
     let h2 = document.createElement("h2");
     h2.innerHTML = category.strCategory;
 
@@ -51,7 +54,7 @@ document.addEventListener("DOMContentLoaded", () => {
     categoryTitle.appendChild(h2);
     categoryCard.appendChild(categoryTitle);
     categories.appendChild(categoryCard);
-    //console.log(categoryCard);
+    //console.log(catCard);
   };
 
   //* Hide welcome div
@@ -77,6 +80,7 @@ document.addEventListener("DOMContentLoaded", () => {
     categories.classList.remove("divOff");
     categories.classList.add("divOn");
   });
+
   activitiesSearch.addEventListener("click", () => {
     console.log("search clicked");
     activities.classList.add("divOff");
