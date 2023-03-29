@@ -6,7 +6,7 @@ document.addEventListener("DOMContentLoaded", () => {
   const activitiesCategories = document.querySelector(".activitiesCategories");
   const activitiesSearch = document.querySelector(".activitiesSearch");
   const activities = document.querySelector(".activities");
-  const catCard = document.querySelector(".categoryCard");
+  const mealRecipes = document.querySelector(".mealRecipes");
   const search = document.querySelector(".search");
   const inputSearch = document.querySelector(".inputSearch");
   const footerText = document.querySelector(".footerText");
@@ -19,39 +19,6 @@ document.addEventListener("DOMContentLoaded", () => {
   const date = new Date();
   let year = date.getFullYear();
   footerText.innerHTML = `&copy; devTro ${year} All Rights Reserved.`;
-
-  //* HIDE WELCOME DIV
-  welcomeDiv.addEventListener(
-    "click",
-    (showMainView = () => {
-      console.log("welcome click, main view showed");
-      console.log(welcomeDiv.classList.contains("divOff"));
-      if (welcomeDiv.className !== "divOff") {
-        welcomeDiv.classList.remove("divOn");
-        welcomeDiv.classList.add("divOff");
-        mainView.classList.remove("divOff");
-        mainView.classList.add("divOn");
-      } else {
-      }
-    })
-  );
-
-  //*SHOW CATEGORIES
-  activitiesCategories.addEventListener("click", () => {
-    //* DOWNLOADS CATEGORIES FROM API
-    fetch(CATEGORIES_URL)
-      .then((res) => res.json())
-      .then((data) => {
-        data.categories.map((category) => {
-          //console.log(category);
-          createCard(category);
-        });
-      });
-    console.log("categories clicked");
-    activities.classList.add("divOff");
-    categories.classList.remove("divOff");
-    categories.classList.add("divOn");
-  });
 
   //* CREATE CARDS FOR CATEGORIES
   let createCard = (category) => {
@@ -99,19 +66,77 @@ document.addEventListener("DOMContentLoaded", () => {
         .then((res) => res.json())
         .then((data) => {
           mealsList = data.meals;
+          mealsList.map((meal) => {
+            createCardMeal(meal);
+          });
           inputSearch.value = "";
           console.log(mealsList);
 
-          let mealDiv = document.createElement("div");
+          /* let mealDiv = document.createElement("div");
           mealDiv.classList.add("searchMeals");
           mealDiv.classList.add("centerFlex");
           search.appendChild(mealDiv);
-
-          createCardMeal(mealsList);
+*/
         });
   });
 
   let createCardMeal = (mealsList) => {
     console.log(mealsList);
+    let mealCard = document.createElement("div");
+    mealCard.setAttribute("id", `${mealsList.idMeal}`);
+    mealCard.classList.add("mealCard");
+    mealCard.classList.add("centerFlex");
+
+    let mealTitle = document.createElement("div");
+    mealTitle.classList.add("categoryTitle");
+    mealTitle.classList.add("centerFlex");
+    let h2 = document.createElement("h2");
+    h2.innerHTML = mealsList.strMeal;
+
+    let mealPhoto = document.createElement("div");
+    mealPhoto.classList.add("categoryPhoto");
+
+    let mealImg = document.createElement("img");
+    mealImg.src = `${mealsList.strMealThumb}`;
+    mealImg.alt = `${mealsList.strMeal} photo`;
+
+    mealPhoto.appendChild(mealImg);
+    mealCard.appendChild(mealPhoto);
+    mealTitle.appendChild(h2);
+    mealCard.appendChild(mealTitle);
+    mealRecipes.appendChild(mealCard);
   };
+
+  //* HIDE WELCOME DIV
+  welcomeDiv.addEventListener(
+    "click",
+    (showMainView = () => {
+      console.log("welcome click, main view showed");
+      console.log(welcomeDiv.classList.contains("divOff"));
+      if (welcomeDiv.className !== "divOff") {
+        welcomeDiv.classList.remove("divOn");
+        welcomeDiv.classList.add("divOff");
+        mainView.classList.remove("divOff");
+        mainView.classList.add("divOn");
+      } else {
+      }
+    })
+  );
+
+  //*SHOW CATEGORIES
+  activitiesCategories.addEventListener("click", () => {
+    //* DOWNLOADS CATEGORIES FROM API
+    fetch(CATEGORIES_URL)
+      .then((res) => res.json())
+      .then((data) => {
+        data.categories.map((category) => {
+          //console.log(category);
+          createCard(category);
+        });
+      });
+    console.log("categories clicked");
+    activities.classList.add("divOff");
+    categories.classList.remove("divOff");
+    categories.classList.add("divOn");
+  });
 });
