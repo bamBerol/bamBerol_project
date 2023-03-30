@@ -133,19 +133,23 @@ body {
   justify-content: space-evenly;
 }
 
-.categories {
+.categories,
+.mealRecipes {
   width: auto;
-  padding: 1rem 1rem;
+  margin: 1rem 1rem;
   flex-wrap: wrap;
-  overflow: visible;
+  overflow-y: scroll;
 }
 
-/*.categories::-webkit-scrollbar {
+.mealRecipes::-webkit-scrollbar,
+.categories::-webkit-scrollbar {
   display: none;
-} */
+}
 
-.categoryCard {
+.categoryCard,
+.mealCard {
   height: 15rem;
+  max-width: 17rem;
   margin: 1rem 1rem;
   padding: 0.5rem 0.5rem;
   flex-direction: column;
@@ -154,15 +158,26 @@ body {
   border-radius: 0.5rem;
 }
 
-.categoryCard:hover {
+.categoryCard:hover,
+.mealCard:hover {
   box-shadow: 0 10px 20px rgba(214, 223, 225, 0.5);
   cursor: pointer;
 }
 
-.categoryTitle {
+.categoryTitle,
+.mealTitle {
+  flex-wrap: wrap;
+  text-align: center;
   font-size: 1.5rem;
   font-weight: 600;
   color: var(--blue);
+}
+
+.categoryPhoto,
+.mealPhoto,
+.mealPhoto img {
+  height: 200px;
+  width: 320px;
 }
 
 .search {
