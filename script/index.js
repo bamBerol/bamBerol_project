@@ -14,9 +14,9 @@ document.addEventListener("DOMContentLoaded", () => {
 
   CATEGORIES_URL = "https://www.themealdb.com/api/json/v1/1/categories.php";
 
-  let mealsList;
+  let mealsList = [];
 
-  //* Set current year in footer
+  //* SET CURRENT YEAR
   const date = new Date();
   let year = date.getFullYear();
   footerText.innerHTML = `&copy; devTro ${year} All Rights Reserved.`;
@@ -38,6 +38,7 @@ document.addEventListener("DOMContentLoaded", () => {
     let categoryPhoto = document.createElement("div");
     categoryPhoto.classList.add("categoryPhoto");
     categoryPhoto.style.backgroundImage = `url(${category.strCategoryThumb})`;
+    categoryPhoto.style.backgroundPosition = "center";
     categoryPhoto.alt = `${category.strCategory} photo`;
 
     categoryCard.appendChild(categoryPhoto);
@@ -47,6 +48,7 @@ document.addEventListener("DOMContentLoaded", () => {
     //console.log(catCard);
   };
 
+  //* CREATE CARDS FOR MEALS
   let createCardMeal = (mealsList) => {
     console.log(mealsList);
     let mealCard = document.createElement("div");
@@ -63,6 +65,9 @@ document.addEventListener("DOMContentLoaded", () => {
     let mealPhoto = document.createElement("div");
     mealPhoto.classList.add("mealPhoto");
     mealPhoto.style.backgroundImage = `url(${mealsList.strMealThumb})`;
+    mealPhoto.style.backgroundRepeat = "no-repeat";
+    mealPhoto.style.backgroundPosition = "center";
+    mealPhoto.style.backgroundSize = "90%";
     mealPhoto.alt = `${mealsList.strMeal} photo`;
 
     mealCard.appendChild(mealPhoto);
@@ -94,7 +99,6 @@ document.addEventListener("DOMContentLoaded", () => {
       .then((res) => res.json())
       .then((data) => {
         data.categories.map((category) => {
-          //console.log(category);
           createCard(category);
         });
       });
@@ -115,17 +119,27 @@ document.addEventListener("DOMContentLoaded", () => {
   //*SEARCH RECIPE BY NAME
   inputSearch.addEventListener("keyup", (e) => {
     mealName = e.target.value;
-    if (e.keyCode === 13 && inputSearch.value !== "")
+    if (e.keyCode === 13 && inputSearch.value !== "") {
+      mealRecipes.classList.remove("divOff");
+      mealRecipes.classList.add("divOn");
+      searchTitle.classList.add("divOff");
       fetch(`https://www.themealdb.com/api/json/v1/1/search.php?s=${mealName}`)
         .then((res) => res.json())
         .then((data) => {
-          mealsList = data.meals;
-          mealsList.map((meal) => {
+          console.log(data.meals);
+          if (mealsList === []) {
+            mealsList.push(data.meals);
+          } else {
+            mealsList.shift();
+            mealRecipes.innerHTML = "";
+            mealsList.push(data.meals);
+          }
+          mealsList[0].map((meal) => {
             createCardMeal(meal);
+            inputSearch.value = "";
+            console.log(mealsList);
           });
-          inputSearch.value = "";
-          searchTitle.classList.add("divOff");
-          console.log(mealsList);
         });
+    }
   });
 });

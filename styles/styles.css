@@ -10,7 +10,8 @@ html {
 }
 
 body {
-  font-family: "Source Sans Pro", sans-serif;
+  font-family: "TT Prosto Sans Trial", sans-serif;
+  font-family: "TT Prosto Sans Trl Cnd", sans-serif;
 }
 
 /*body::-webkit-scrollbar {
@@ -79,6 +80,7 @@ body {
 .headerLogo {
   font-size: 2rem;
   font-style: italic;
+  font-weight: bold;
   color: var(--yellow);
 }
 
@@ -112,8 +114,8 @@ body {
   display: flex;
   align-items: center;
   justify-content: center;
-  height: 300px;
-  width: 400px;
+  width: 15rem;
+  height: 12rem;
   margin: 1rem 0;
   font-size: 2rem;
   font-style: italic;
@@ -138,7 +140,9 @@ body {
   width: auto;
   margin: 1rem 1rem;
   flex-wrap: wrap;
+  flex-grow: 1;
   overflow-y: scroll;
+  scroll-behavior: smooth;
 }
 
 .mealRecipes::-webkit-scrollbar,
@@ -153,7 +157,7 @@ body {
   margin: 1rem 1rem;
   padding: 0.5rem 0.5rem;
   flex-direction: column;
-  justify-content: space-evenly;
+
   background-color: rgba(214, 223, 225, 0.7);
   border-radius: 0.5rem;
 }
@@ -166,6 +170,7 @@ body {
 
 .categoryTitle,
 .mealTitle {
+  flex-grow: 1;
   flex-wrap: wrap;
   text-align: center;
   font-size: 1.5rem;
@@ -174,10 +179,13 @@ body {
 }
 
 .categoryPhoto,
-.mealPhoto,
-.mealPhoto img {
+.mealPhoto {
   height: 200px;
   width: 320px;
+}
+
+.mealPhoto {
+  margin-top: 0.5rem;
 }
 
 .search {
