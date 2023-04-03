@@ -10,6 +10,7 @@ document.addEventListener("DOMContentLoaded", () => {
   const searchTitle = document.querySelector(".searchTitle");
   const search = document.querySelector(".search");
   const inputSearch = document.querySelector(".inputSearch");
+  const inputHeader = document.querySelector(".inputHeader");
   const footerText = document.querySelector(".footerText");
 
   CATEGORIES_URL = "https://www.themealdb.com/api/json/v1/1/categories.php";

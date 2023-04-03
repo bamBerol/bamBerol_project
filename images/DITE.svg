@@ -1,0 +1,67 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg id="Warstwa_1" data-name="Warstwa 1" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 250.86 246.33">
+  <defs>
+    <style>
+      .cls-1 {
+        fill: #fff;
+      }
+
+      .cls-2 {
+        fill: #fc493e;
+      }
+
+      .cls-3 {
+        stroke: #fdc643;
+      }
+
+      .cls-3, .cls-4, .cls-5 {
+        fill: none;
+        stroke-miterlimit: 10;
+      }
+
+      .cls-4 {
+        stroke-width: .75px;
+      }
+
+      .cls-4, .cls-5 {
+        stroke: #a8aeaf;
+      }
+
+      .cls-6 {
+        fill: #d6dfe1;
+      }
+
+      .cls-7 {
+        letter-spacing: .05em;
+      }
+
+      .cls-7, .cls-8 {
+        font-family: TTProstoSansTrial-Light, 'TT Prosto Sans Trial';
+        font-size: 18px;
+      }
+
+      .cls-8 {
+        letter-spacing: .06em;
+      }
+    </style>
+  </defs>
+  <ellipse class="cls-1" cx="125.43" cy="123.17" rx="125.43" ry="123.17"/>
+  <path class="cls-3" d="M10.47,85.44C27.44,36.88,73.29,4.04,124.54,3.67c51.89-.38,98.66,32.6,115.85,81.78"/>
+  <path class="cls-3" d="M240.48,160.3c-16.98,48.57-62.82,81.4-114.07,81.78-51.89,.38-98.66-32.6-115.85-81.78"/>
+  <circle class="cls-6" cx="125.43" cy="121.17" r="55.7"/>
+  <circle class="cls-5" cx="125.43" cy="121.17" r="30.27"/>
+  <circle class="cls-2" cx="9.5" cy="120.88" r="4.52"/>
+  <circle class="cls-2" cx="241.09" cy="120.88" r="4.52"/>
+  <path class="cls-4" d="M41.61,86.44s0-.77,.68-.77,.74,.77,.74,.77v16.37s.03,1.11,.84,1.11,.82-1.11,.82-1.11l.87-16.37s.07-.77,.57-.77,.53,.77,.53,.77l.38,16.37s.01,1.11,.66,1.11,.62-1.11,.62-1.11l.55-16.37s.11-.77,.59-.77,.61,.77,.61,.77l.54,16.37s-.03,1.11,.75,1.11,.8-1.11,.8-1.11v-16.37s-.03-.77,.68-.77,.74,.77,.74,.77c0,0,.35,21.69,0,22.68s-3.96,4.48-3.96,4.48l.39,52.35s-.2,1.3-2.41,1.3-2.42-1.3-2.42-1.3l.36-52.35s-3.58-3.44-3.93-4.48,0-22.68,0-22.68Z"/>
+  <path class="cls-4" d="M193.84,165.96s.08,1.3,3.06,1.3,2.98-1.3,2.98-1.3c0,0-.89-39.69-.81-39.91,.22-1.42,.81-1.59,.81-2.2v-37.44s-.16-.55-.78-.8-2.63-.2-2.96,0c-1.09,.55-2.11,2.3-2.3,3s-2.55,35.34-2.11,37.35,2.89,4,2.89,4l-.78,36Z"/>
+  <path class="cls-4" d="M219.02,167.27c3.4,0,3.4-1.3,3.4-1.3l-1.54-51.12c2.9-1.01,6.32-3.06,7.51-8.18,1.54-5.08,1.42-8.97,0-13.53-1.61-5.17-5.97-6.81-5.97-6.81,0,0-1.39-.72-3.43-.72s-3.32,.72-3.32,.72c0,0-4.77,2.25-6.03,6.81s-1,8.35,0,13.53c1.01,5.21,5.23,7.63,7.48,8.18l-1.45,51.12s-.05,1.3,3.35,1.3Z"/>
+  <text class="cls-8" transform="translate(155.59 218.39) rotate(-19.46)"><tspan x="0" y="0">A</tspan></text>
+  <text class="cls-7" transform="translate(130.5 221.23) rotate(-3.49)"><tspan x="0" y="0">E</tspan></text>
+  <text class="cls-8" transform="translate(164.46 40.25) rotate(17.95)"><tspan x="0" y="0">T</tspan></text>
+  <text class="cls-8" transform="translate(58.59 203.62) rotate(25.47)"><tspan x="0" y="0">T</tspan></text>
+  <text class="cls-8" transform="translate(181.38 208.43) rotate(-25.18)"><tspan x="0" y="0">T</tspan></text>
+  <text class="cls-7" transform="translate(147.35 36.01) rotate(8.43)"><tspan x="0" y="0">I</tspan></text>
+  <text class="cls-7" transform="translate(100.26 36.01) rotate(-8.63)"><tspan x="0" y="0">O</tspan></text>
+  <text class="cls-7" transform="translate(82.24 214.38) rotate(16.4)"><tspan x="0" y="0">O</tspan></text>
+  <text class="cls-7" transform="translate(73.87 44.55) rotate(-16.3)"><tspan x="0" y="0">D</tspan></text>
+</svg>
