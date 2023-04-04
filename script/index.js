@@ -1,7 +1,9 @@
 document.addEventListener("DOMContentLoaded", () => {
-  const logo = document.querySelector(".logo");
+  const logo = document.querySelector(".headerLogo");
   const categories = document.querySelector(".categories");
+  const category = document.querySelector(".category");
   const welcomeDiv = document.querySelector(".welcome");
+  const top = document.querySelector(".top");
   const mainView = document.querySelector(".mainView");
   const activitiesCategories = document.querySelector(".activitiesCategories");
   const activitiesSearch = document.querySelector(".activitiesSearch");
@@ -29,6 +31,7 @@ document.addEventListener("DOMContentLoaded", () => {
     categoryCard.setAttribute("id", `${category.idCategory}`);
     categoryCard.classList.add("categoryCard");
     categoryCard.classList.add("centerFlex");
+    categoryCard.classList.add("showCard");
 
     let categoryTitle = document.createElement("div");
     categoryTitle.classList.add("categoryTitle");
@@ -46,12 +49,15 @@ document.addEventListener("DOMContentLoaded", () => {
     categoryTitle.appendChild(h2);
     categoryCard.appendChild(categoryTitle);
     categories.appendChild(categoryCard);
-    //console.log(catCard);
+
+    categoryCard.addEventListener("click", () => {
+      chooseCategory(category);
+    });
   };
 
   //* CREATE CARDS FOR MEALS
   let createCardMeal = (mealsList) => {
-    console.log(mealsList);
+    //console.log(mealsList);
     let mealCard = document.createElement("div");
     mealCard.setAttribute("id", `${mealsList.idMeal}`);
     mealCard.classList.add("mealCard");
@@ -75,6 +81,17 @@ document.addEventListener("DOMContentLoaded", () => {
     mealTitle.appendChild(h2);
     mealCard.appendChild(mealTitle);
     mealRecipes.appendChild(mealCard);
+  };
+
+  let chooseCategory = (category) => {
+    console.log(category.idCategory, category.strCategory);
+    fetch(
+      `https://www.themealdb.com/api/json/v1/1/filter.php?c=${category.strCategory}`
+    )
+      .then((res) => res.json())
+      .then((data) => {
+        console.log(data.meals);
+      });
   };
 
   //* HIDE WELCOME DIV
@@ -121,6 +138,9 @@ document.addEventListener("DOMContentLoaded", () => {
   inputSearch.addEventListener("keyup", (e) => {
     mealName = e.target.value;
     if (e.keyCode === 13 && inputSearch.value !== "") {
+      inputHeader.appendChild(inputSearch);
+      inputHeader.classList.remove("divOff");
+      top.classList.add("topInput");
       mealRecipes.classList.remove("divOff");
       mealRecipes.classList.add("divOn");
       searchTitle.classList.add("divOff");
