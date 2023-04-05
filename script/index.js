@@ -1,7 +1,5 @@
 document.addEventListener("DOMContentLoaded", () => {
-  const logo = document.querySelector(".headerLogo");
   const categories = document.querySelector(".categories");
-  const category = document.querySelector(".category");
   const welcomeDiv = document.querySelector(".welcome");
   const top = document.querySelector(".top");
   const mainView = document.querySelector(".mainView");
@@ -18,6 +16,7 @@ document.addEventListener("DOMContentLoaded", () => {
   CATEGORIES_URL = "https://www.themealdb.com/api/json/v1/1/categories.php";
 
   let mealsList = [];
+  let categoryMeals = [];
 
   //* SET CURRENT YEAR
   const date = new Date();
@@ -81,17 +80,42 @@ document.addEventListener("DOMContentLoaded", () => {
     mealTitle.appendChild(h2);
     mealCard.appendChild(mealTitle);
     mealRecipes.appendChild(mealCard);
+
+    mealCard.addEventListener("click", () => {
+      //console.log(mealsList);
+      mealDetail(mealsList);
+    });
   };
 
+  //* SHOW MEALS LIST AFTER CHOOSE CATEGORY
   let chooseCategory = (category) => {
-    console.log(category.idCategory, category.strCategory);
+    //console.log(category.idCategory, category.strCategory);
+    categories.classList.remove("divOn");
+    categories.classList.add("divOff");
+    mealRecipes.classList.remove("divOff");
+    mealRecipes.classList.add("divOn");
+
     fetch(
       `https://www.themealdb.com/api/json/v1/1/filter.php?c=${category.strCategory}`
     )
       .then((res) => res.json())
       .then((data) => {
-        console.log(data.meals);
+        if (categoryMeals === []) {
+          categoryMeals.push(data.meals);
+        } else {
+          categoryMeals.shift();
+          mealRecipes.innerHTML = "";
+          categoryMeals.push(data.meals);
+        }
+        categoryMeals[0].map((meal) => {
+          createCardMeal(meal);
+        });
       });
+  };
+
+  //* SHOW RECIPE DETAIL
+  let mealDetail = (mealDetail) => {
+    console.log(mealDetail);
   };
 
   //* HIDE WELCOME DIV
@@ -120,7 +144,7 @@ document.addEventListener("DOMContentLoaded", () => {
           createCard(category);
         });
       });
-    console.log("categories clicked");
+    //console.log("categories clicked");
     activities.classList.add("divOff");
     categories.classList.remove("divOff");
     categories.classList.add("divOn");
@@ -144,6 +168,8 @@ document.addEventListener("DOMContentLoaded", () => {
       mealRecipes.classList.remove("divOff");
       mealRecipes.classList.add("divOn");
       searchTitle.classList.add("divOff");
+      search.classList.remove("divOn");
+      search.classList.add("divOff");
       fetch(`https://www.themealdb.com/api/json/v1/1/search.php?s=${mealName}`)
         .then((res) => res.json())
         .then((data) => {
@@ -158,7 +184,7 @@ document.addEventListener("DOMContentLoaded", () => {
           mealsList[0].map((meal) => {
             createCardMeal(meal);
             inputSearch.value = "";
-            console.log(mealsList);
+            //console.log(mealsList);
           });
         });
     }
