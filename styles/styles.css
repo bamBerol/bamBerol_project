@@ -82,9 +82,6 @@ body {
   height: 3rem;
 }
 
-.inputHeader {
-}
-
 .activities,
 .activitiesOption {
   width: 100%;
@@ -128,6 +125,9 @@ body {
 .activitiesSearch:hover,
 .activitiesCategories:hover {
   cursor: pointer;
+  color: #ffbf25;
+  background-color: rgba(4, 45, 88, 0.6);
+  transition: color 0.3s, background-color 0.3s;
 }
 
 .activitiesOption {
@@ -168,9 +168,13 @@ body {
 }
 
 .categoryCard:hover,
-.mealCard:hover {
-  box-shadow: 0 10px 20px rgba(214, 223, 225, 0.5);
+.mealCard:hover,
+.categoryCard:hover .categoryTitle,
+.mealCard:hover .mealTitle {
+  /*box-shadow: 0 10px 20px rgba(214, 223, 225, 0.5);*/
+  color: #ffbf25;
   cursor: pointer;
+  transition: color 0.3s;
 }
 
 .categoryTitle,
@@ -214,6 +218,69 @@ body {
   padding: 0.5rem 2rem;
   border-radius: 1.5rem;
   font-size: 1rem;
+}
+
+.errorTxt {
+  text-align: center;
+  font-size: 2rem;
+  font-weight: bold;
+  color: var(--grey);
+}
+
+.recipe,
+.recipeDetail {
+  height: 100%;
+  width: 100%;
+}
+.recipe {
+  background-color: rgba(255, 255, 255, 0.8);
+  border-radius: 0.5rem;
+}
+
+.recipeDetail {
+  flex-direction: column;
+  padding: 0.5rem;
+}
+
+.recipeDetailTitle {
+  width: 100%;
+}
+
+.recipeTitle {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.recipeTitle > h2 {
+  font-size: 2rem;
+  font-weight: bold;
+  color: var(--grey);
+}
+
+.backgroundPhoto {
+  position: relative;
+  width: 100%;
+  height: 7rem;
+}
+
+.back {
+  position: absolute;
+  padding: 0.5rem;
+  top: 1rem;
+  left: 1rem;
+  color: var(--blue);
+}
+
+.back:hover {
+  cursor: pointer;
+  scale: 1.3;
+  color: var(--yellow);
+  transition: all 0.2s;
+}
+
+.recipeDetailInstr {
+  flex-grow: 1;
 }
 
 .bottom {

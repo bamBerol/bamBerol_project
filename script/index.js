@@ -7,10 +7,14 @@ document.addEventListener("DOMContentLoaded", () => {
   const activitiesSearch = document.querySelector(".activitiesSearch");
   const activities = document.querySelector(".activities");
   const mealRecipes = document.querySelector(".mealRecipes");
+  const recipe = document.querySelector(".recipe");
   const searchTitle = document.querySelector(".searchTitle");
   const search = document.querySelector(".search");
   const inputSearch = document.querySelector(".inputSearch");
   const inputHeader = document.querySelector(".inputHeader");
+  const bgPhoto = document.querySelector(".backgroundPhoto");
+  const recipeTitle = document.querySelector(".recipeTitle");
+  const errorMsg = document.querySelector(".error");
   const footerText = document.querySelector(".footerText");
 
   CATEGORIES_URL = "https://www.themealdb.com/api/json/v1/1/categories.php";
@@ -116,6 +120,35 @@ document.addEventListener("DOMContentLoaded", () => {
   //* SHOW RECIPE DETAIL
   let mealDetail = (mealDetail) => {
     console.log(mealDetail);
+    mealRecipes.classList.remove("divOn");
+    mealRecipes.classList.add("divOff");
+    recipe.classList.remove("divOff");
+    recipe.classList.add("divOn");
+
+    bgPhoto.style.backgroundImage = `url(${mealDetail.strMealThumb})`;
+    bgPhoto.style.backgroundRepeat = "no-repeat";
+    bgPhoto.style.backgroundPosition = "center";
+    bgPhoto.alt = `${mealDetail.strMeal} photo`;
+
+    let title = document.createElement("h2");
+    title.innerHTML = `${mealDetail.strMeal}`;
+
+    recipeTitle.appendChild(title);
+    bgPhoto.appendChild(recipeTitle);
+
+    document.querySelector(".back").addEventListener("click", () => {
+      backBtn(title);
+    });
+  };
+
+  //* BACK TO MEALS LIST
+  let backBtn = (title) => {
+    console.log("back");
+    title.innerHTML = "";
+    mealRecipes.classList.remove("divOff");
+    mealRecipes.classList.add("divOn");
+    recipe.classList.remove("divOn");
+    recipe.classList.add("divOff");
   };
 
   //* HIDE WELCOME DIV
@@ -174,7 +207,14 @@ document.addEventListener("DOMContentLoaded", () => {
         .then((res) => res.json())
         .then((data) => {
           console.log(data.meals);
-          if (mealsList === []) {
+          if (data.meals === null) {
+            mealsList.shift();
+            mealRecipes.innerHTML = "";
+            console.log("recipe not found, try again");
+            errorMsg.classList.remove("divOff");
+            errorMsg.classList.add("divOn");
+            mealRecipes.appendChild(errorMsg);
+          } else if (mealsList === []) {
             mealsList.push(data.meals);
           } else {
             mealsList.shift();

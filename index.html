@@ -19,16 +19,20 @@
       href="https://fonts.cdnfonts.com/css/tt-prosto-sans-trial"
       rel="stylesheet"
     />
+    <script
+      src="https://kit.fontawesome.com/778df21874.js"
+      crossorigin="anonymous"
+    ></script>
   </head>
   <body>
-    <div class="background">
+    <section class="background">
       <div class="page-wrapper">
         <div class="welcome divOn">
           <div class="welcomeLogoDiv centerFlex">
             <img src="./images/DITE.svg" alt="DITElogo" />
           </div>
           <div class="welcomeLogoDivInfo">
-            <p>Click here to start</p>
+            <p>Click to start</p>
           </div>
         </div>
         <div class="mainView centerFlex divOff">
@@ -54,8 +58,8 @@
                 </div>
               </div>
             </div>
-            <div class="categories centerFlex divOff"></div>
-            <div class="search divOff">
+            <section class="categories centerFlex divOff"></section>
+            <section class="search divOff">
               <div class="searchTitle">
                 <h2>Search recipe</h2>
               </div>
@@ -66,16 +70,45 @@
                   placeholder="Search recipe here"
                 />
               </div>
+            </section>
+            <section class="mealRecipes centerFlex divOff"></section>
+            <div class="error centerFlex divOff">
+              <div class="errorMsg">
+                <p class="errorTxt">
+                  Recipe not found, try again <br />
+                  <script src="https://cdn.lordicon.com/ritcuqlt.js"></script>
+                  <lord-icon
+                    src="https://cdn.lordicon.com/inrunzby.json"
+                    trigger="loop"
+                    delay="1500"
+                    colors="primary:#ffbf25,secondary:#ff2216"
+                    style="width: 250px; height: 250px"
+                  >
+                  </lord-icon>
+                </p>
+              </div>
             </div>
-            <div class="mealRecipes centerFlex divOff"></div>
             <div class="category centerFlex divOff"></div>
+            <section class="recipe centerFlex divOff">
+              <div class="recipeDetail centerFlex">
+                <div class="recipeDetailTitle centerFlex">
+                  <div class="backgroundPhoto centerFlex">
+                    <div class="back">
+                      <i class="fa-solid fa-arrow-left fa-lg"></i>
+                    </div>
+                    <div class="recipeTitle"></div>
+                  </div>
+                </div>
+                <div class="recipeDetailInstr"></div>
+              </div>
+            </section>
           </main>
           <footer class="bottom centerFlex">
             <p class="footerText"></p>
           </footer>
         </div>
       </div>
-    </div>
+    </section>
     <script src="./script/index.js"></script>
   </body>
 </html>
