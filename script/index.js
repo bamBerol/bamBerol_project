@@ -29,7 +29,7 @@ document.addEventListener("DOMContentLoaded", () => {
 
   //* CREATE CARDS FOR CATEGORIES
   let createCard = (category) => {
-    //console.log(category);
+    console.log(category);
     let categoryCard = document.createElement("div");
     categoryCard.setAttribute("id", `${category.idCategory}`);
     categoryCard.classList.add("categoryCard");
@@ -86,8 +86,14 @@ document.addEventListener("DOMContentLoaded", () => {
     mealRecipes.appendChild(mealCard);
 
     mealCard.addEventListener("click", () => {
-      //console.log(mealsList);
-      mealDetail(mealsList);
+      fetch(
+        `https://www.themealdb.com/api/json/v1/1/search.php?s=${mealsList.strMeal}`
+      )
+        .then((res) => res.json())
+        .then((data) => {
+          //console.log(data.meals[0]);
+          mealDetail(data.meals[0]);
+        });
     });
   };
 
@@ -104,6 +110,7 @@ document.addEventListener("DOMContentLoaded", () => {
     )
       .then((res) => res.json())
       .then((data) => {
+        console.log(data.meals);
         if (categoryMeals === []) {
           categoryMeals.push(data.meals);
         } else {
@@ -125,16 +132,19 @@ document.addEventListener("DOMContentLoaded", () => {
     recipe.classList.remove("divOff");
     recipe.classList.add("divOn");
 
-    bgPhoto.style.backgroundImage = `url(${mealDetail.strMealThumb})`;
+    /*bgPhoto.style.backgroundImage = `url(${mealDetail.strMealThumb})`;
     bgPhoto.style.backgroundRepeat = "no-repeat";
     bgPhoto.style.backgroundPosition = "center";
     bgPhoto.alt = `${mealDetail.strMeal} photo`;
+    */
 
     let title = document.createElement("h2");
     title.innerHTML = `${mealDetail.strMeal}`;
 
     recipeTitle.appendChild(title);
     bgPhoto.appendChild(recipeTitle);
+
+    showInstr(mealDetail);
 
     document.querySelector(".back").addEventListener("click", () => {
       backBtn(title);
@@ -144,12 +154,27 @@ document.addEventListener("DOMContentLoaded", () => {
   //* BACK TO MEALS LIST
   let backBtn = (title) => {
     console.log("back");
-    title.innerHTML = "";
+    recipeTitle.removeChild(title);
     mealRecipes.classList.remove("divOff");
     mealRecipes.classList.add("divOn");
     recipe.classList.remove("divOn");
     recipe.classList.add("divOff");
   };
+
+  //*SHOW RECIPE INSTRUCTIONS
+  let showInstr = (mealDetail) => {
+    console.log("instr show", mealDetail);
+    let instr = document.querySelector(".instructionsDetail");
+    let p = document.createElement("p");
+    p.classList.add("centerFlex");
+    p.innerHTML = mealDetail.strInstructions;
+    instr.appendChild(p);
+
+    ingredientsList(mealDetail);
+  };
+
+  //* SHOW INGREDIENTS LIST
+  let ingredientsList = (mealDetail) => {};
 
   //* HIDE WELCOME DIV
   welcomeDiv.addEventListener(
@@ -203,11 +228,13 @@ document.addEventListener("DOMContentLoaded", () => {
       searchTitle.classList.add("divOff");
       search.classList.remove("divOn");
       search.classList.add("divOff");
+
       fetch(`https://www.themealdb.com/api/json/v1/1/search.php?s=${mealName}`)
         .then((res) => res.json())
         .then((data) => {
-          console.log(data.meals);
+          //console.log(data.meals);
           if (data.meals === null) {
+            inputSearch.value = "";
             mealsList.shift();
             mealRecipes.innerHTML = "";
             console.log("recipe not found, try again");

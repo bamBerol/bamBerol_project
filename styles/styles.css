@@ -120,6 +120,7 @@ body {
   color: var(--blue);
   background-color: rgba(214, 223, 225, 0.85);
   border-radius: 0.5rem;
+  transition: color 0.3s, background-color 0.3s;
 }
 
 .activitiesSearch:hover,
@@ -162,7 +163,6 @@ body {
   margin: 1rem 1rem;
   padding: 0.5rem 0.5rem;
   flex-direction: column;
-
   background-color: rgba(214, 223, 225, 0.7);
   border-radius: 0.5rem;
 }
@@ -171,7 +171,6 @@ body {
 .mealCard:hover,
 .categoryCard:hover .categoryTitle,
 .mealCard:hover .mealTitle {
-  /*box-shadow: 0 10px 20px rgba(214, 223, 225, 0.5);*/
   color: #ffbf25;
   cursor: pointer;
   transition: color 0.3s;
@@ -185,6 +184,7 @@ body {
   font-size: 1.5rem;
   font-weight: 600;
   color: var(--blue);
+  transition: color 0.3s;
 }
 
 .categoryPhoto,
@@ -255,7 +255,7 @@ body {
 .recipeTitle > h2 {
   font-size: 2rem;
   font-weight: bold;
-  color: var(--grey);
+  color: var(--blue);
 }
 
 .backgroundPhoto {
@@ -280,6 +280,19 @@ body {
 }
 
 .recipeDetailInstr {
+  flex-grow: 1;
+}
+
+.recipeDetailInstr {
+  flex-direction: row;
+}
+
+.ingredients {
+  height: 100%;
+}
+
+.instructions {
+  height: 100%;
   flex-grow: 1;
 }
 
