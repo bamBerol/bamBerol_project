@@ -8,12 +8,14 @@ document.addEventListener("DOMContentLoaded", () => {
   const activities = document.querySelector(".activities");
   const mealRecipes = document.querySelector(".mealRecipes");
   const recipe = document.querySelector(".recipe");
+  const instructionsDetail = document.querySelector(".instructionsDetail");
+  const list = document.querySelector(".ingredientsList");
+  const recipeTitle = document.querySelector(".recipeTitle");
   const searchTitle = document.querySelector(".searchTitle");
   const search = document.querySelector(".search");
   const inputSearch = document.querySelector(".inputSearch");
   const inputHeader = document.querySelector(".inputHeader");
   const bgPhoto = document.querySelector(".backgroundPhoto");
-  const recipeTitle = document.querySelector(".recipeTitle");
   const errorMsg = document.querySelector(".error");
   const footerText = document.querySelector(".footerText");
 
@@ -29,7 +31,7 @@ document.addEventListener("DOMContentLoaded", () => {
 
   //* CREATE CARDS FOR CATEGORIES
   let createCard = (category) => {
-    console.log(category);
+    //console.log(category);
     let categoryCard = document.createElement("div");
     categoryCard.setAttribute("id", `${category.idCategory}`);
     categoryCard.classList.add("categoryCard");
@@ -60,6 +62,7 @@ document.addEventListener("DOMContentLoaded", () => {
 
   //* CREATE CARDS FOR MEALS
   let createCardMeal = (mealsList) => {
+    categories.scrollTop;
     //console.log(mealsList);
     let mealCard = document.createElement("div");
     mealCard.setAttribute("id", `${mealsList.idMeal}`);
@@ -126,7 +129,7 @@ document.addEventListener("DOMContentLoaded", () => {
 
   //* SHOW RECIPE DETAIL
   let mealDetail = (mealDetail) => {
-    console.log(mealDetail);
+    //console.log(mealDetail);
     mealRecipes.classList.remove("divOn");
     mealRecipes.classList.add("divOff");
     recipe.classList.remove("divOff");
@@ -153,7 +156,13 @@ document.addEventListener("DOMContentLoaded", () => {
 
   //* BACK TO MEALS LIST
   let backBtn = (title) => {
-    console.log("back");
+    while (list.firstChild) {
+      list.removeChild(list.firstChild);
+    }
+    while (instructionsDetail.firstChild) {
+      instructionsDetail.removeChild(instructionsDetail.firstChild);
+    }
+
     recipeTitle.removeChild(title);
     mealRecipes.classList.remove("divOff");
     mealRecipes.classList.add("divOn");
@@ -174,7 +183,52 @@ document.addEventListener("DOMContentLoaded", () => {
   };
 
   //* SHOW INGREDIENTS LIST
-  let ingredientsList = (mealDetail) => {};
+  let ingredientsList = (mealDetail) => {
+    let ingrList = [];
+    let measureList = [];
+    let ingrMeas = [];
+
+    Object.entries(mealDetail).forEach((elmt) => {
+      elmt[0].includes("strIngredient")
+        ? ingrList.push(elmt)
+        : elmt[0].includes("strMeasure")
+        ? measureList.push(elmt)
+        : "";
+    });
+    //console.log(ingrList, measureList);
+
+    for (let i = 0; i < ingrList.length; i++) {
+      ingrList[i].includes("")
+        ? ingrList.splice(ingrList.indexOf(ingrList[i]))
+        : "";
+    }
+
+    for (let i = 0; i < measureList.length; i++) {
+      measureList[i].includes("")
+        ? measureList.splice(measureList.indexOf(measureList[i]))
+        : "";
+    }
+
+    for (let i = 0; i < ingrList.length; i++) {
+      console.log(ingrList[i], measureList[i]);
+      ingrMeas.push(ingrList[i][1].concat(" ", measureList[i][1]));
+    }
+    //console.log(ingrMeas);
+    showMeasures(ingrMeas);
+  };
+
+  //*SHOW MEASURES
+  let showMeasures = (ingrMeas) => {
+    console.log(ingrMeas);
+    let ul = document.createElement("ul");
+    ingrMeas.forEach((elmt) => {
+      let li = document.createElement("li");
+      li.innerHTML = elmt;
+      ul.appendChild(li);
+    });
+
+    list.appendChild(ul);
+  };
 
   //* HIDE WELCOME DIV
   welcomeDiv.addEventListener(

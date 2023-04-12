@@ -132,9 +132,11 @@ body {
 }
 
 .activitiesOption {
+  height: auto;
   flex-direction: row;
   align-items: center;
   justify-content: space-evenly;
+  margin-top: 2.5rem;
 }
 
 .categories,
@@ -284,16 +286,8 @@ body {
 }
 
 .recipeDetailInstr {
+  display: flex;
   flex-direction: row;
-}
-
-.ingredients {
-  height: 100%;
-}
-
-.instructions {
-  height: 100%;
-  flex-grow: 1;
 }
 
 .bottom {
