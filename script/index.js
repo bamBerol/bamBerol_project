@@ -162,8 +162,11 @@ document.addEventListener("DOMContentLoaded", () => {
     while (instructionsDetail.firstChild) {
       instructionsDetail.removeChild(instructionsDetail.firstChild);
     }
+    while (recipeTitle.firstChild) {
+      recipeTitle.removeChild(recipeTitle.firstChild);
+    }
 
-    recipeTitle.removeChild(title);
+    //recipeTitle.removeChild(title);
     mealRecipes.classList.remove("divOff");
     mealRecipes.classList.add("divOn");
     recipe.classList.remove("divOn");
@@ -174,11 +177,22 @@ document.addEventListener("DOMContentLoaded", () => {
   let showInstr = (mealDetail) => {
     console.log("instr show", mealDetail);
     let instr = document.querySelector(".instructionsDetail");
-    let p = document.createElement("p");
-    p.classList.add("centerFlex");
-    p.innerHTML = mealDetail.strInstructions;
-    instr.appendChild(p);
+    let prepTitle = document.createElement("h3");
+    const regEx = /STEP|\r?\n|\r/g;
 
+    prepTitle.innerHTML = "Preparation:";
+    instr.appendChild(prepTitle);
+
+    mealDetail.strInstructions.split(regEx).map((elmt) => {
+      if (elmt !== "") {
+        let p = document.createElement("p");
+
+        p.innerHTML = elmt;
+        instr.appendChild(p);
+      }
+    });
+
+    //p.innerHTML = mealDetail.strInstructions;
     ingredientsList(mealDetail);
   };
 
@@ -187,6 +201,9 @@ document.addEventListener("DOMContentLoaded", () => {
     let ingrList = [];
     let measureList = [];
     let ingrMeas = [];
+
+    let ingrListTitle = document.createElement("h3");
+    ingrListTitle.innerHTML = "Ingredients:";
 
     Object.entries(mealDetail).forEach((elmt) => {
       elmt[0].includes("strIngredient")
@@ -210,9 +227,11 @@ document.addEventListener("DOMContentLoaded", () => {
     }
 
     for (let i = 0; i < ingrList.length; i++) {
-      console.log(ingrList[i], measureList[i]);
+      //console.log(ingrList[i], measureList[i]);
       ingrMeas.push(ingrList[i][1].concat(" ", measureList[i][1]));
     }
+
+    list.appendChild(ingrListTitle);
     //console.log(ingrMeas);
     showMeasures(ingrMeas);
   };
