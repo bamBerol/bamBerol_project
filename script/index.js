@@ -1,4 +1,5 @@
 document.addEventListener("DOMContentLoaded", () => {
+  const headerLogo = document.querySelector(".headerLogo");
   const categories = document.querySelector(".categories");
   const welcomeDiv = document.querySelector(".welcome");
   const top = document.querySelector(".top");
@@ -31,7 +32,6 @@ document.addEventListener("DOMContentLoaded", () => {
 
   //* CREATE CARDS FOR CATEGORIES
   let createCard = (category) => {
-    //console.log(category);
     let categoryCard = document.createElement("div");
     categoryCard.setAttribute("id", `${category.idCategory}`);
     categoryCard.classList.add("categoryCard");
@@ -62,8 +62,6 @@ document.addEventListener("DOMContentLoaded", () => {
 
   //* CREATE CARDS FOR MEALS
   let createCardMeal = (mealsList) => {
-    categories.scrollTop;
-    //console.log(mealsList);
     let mealCard = document.createElement("div");
     mealCard.setAttribute("id", `${mealsList.idMeal}`);
     mealCard.classList.add("mealCard");
@@ -94,7 +92,6 @@ document.addEventListener("DOMContentLoaded", () => {
       )
         .then((res) => res.json())
         .then((data) => {
-          //console.log(data.meals[0]);
           mealDetail(data.meals[0]);
         });
     });
@@ -102,7 +99,6 @@ document.addEventListener("DOMContentLoaded", () => {
 
   //* SHOW MEALS LIST AFTER CHOOSE CATEGORY
   let chooseCategory = (category) => {
-    //console.log(category.idCategory, category.strCategory);
     categories.classList.remove("divOn");
     categories.classList.add("divOff");
     mealRecipes.classList.remove("divOff");
@@ -124,22 +120,23 @@ document.addEventListener("DOMContentLoaded", () => {
         categoryMeals[0].map((meal) => {
           createCardMeal(meal);
         });
+        let info =
+          document.querySelector(".categoryCard").parentElement.classList[0];
+        backButton(info);
       });
   };
 
   //* SHOW RECIPE DETAIL
   let mealDetail = (mealDetail) => {
-    //console.log(mealDetail);
     mealRecipes.classList.remove("divOn");
     mealRecipes.classList.add("divOff");
     recipe.classList.remove("divOff");
     recipe.classList.add("divOn");
 
-    /*bgPhoto.style.backgroundImage = `url(${mealDetail.strMealThumb})`;
-    bgPhoto.style.backgroundRepeat = "no-repeat";
-    bgPhoto.style.backgroundPosition = "center";
-    bgPhoto.alt = `${mealDetail.strMeal} photo`;
-    */
+    //bgPhoto.style.backgroundImage = `url(${mealDetail.strMealThumb})`;
+    //bgPhoto.style.backgroundRepeat = "no-repeat";
+    //bgPhoto.style.backgroundPosition = "center";
+    //bgPhoto.alt = `${mealDetail.strMeal} photo`;
 
     let title = document.createElement("h2");
     title.innerHTML = `${mealDetail.strMeal}`;
@@ -150,12 +147,12 @@ document.addEventListener("DOMContentLoaded", () => {
     showInstr(mealDetail);
 
     document.querySelector(".back").addEventListener("click", () => {
-      backBtn(title);
+      backBtn();
     });
   };
 
   //* BACK TO MEALS LIST
-  let backBtn = (title) => {
+  let backBtn = () => {
     while (list.firstChild) {
       list.removeChild(list.firstChild);
     }
@@ -166,11 +163,80 @@ document.addEventListener("DOMContentLoaded", () => {
       recipeTitle.removeChild(recipeTitle.firstChild);
     }
 
-    //recipeTitle.removeChild(title);
     mealRecipes.classList.remove("divOff");
     mealRecipes.classList.add("divOn");
     recipe.classList.remove("divOn");
     recipe.classList.add("divOff");
+  };
+
+  //* BACK BUTTON
+  let backButton = (infoParent) => {
+    let backToCategory = document.createElement("div");
+    backToCategory.classList.add("backBtn");
+    let icon = document.createElement("i");
+    icon.classList.add("fa-solid", "fa-arrow-left", "fa-lg");
+
+    backToCategory.appendChild(icon);
+
+    console.log(infoParent);
+
+    infoParent === "categories"
+      ? backToCat(backToCategory)
+      : infoParent === "activitiesOption"
+      ? backToActv(backToCategory)
+      : infoParent === "activitiesSearch"
+      ? backToActive(backToCategory)
+      : "";
+  };
+
+  let backToCat = (backToCategory) => {
+    console.log("back to cat");
+    mealRecipes.appendChild(backToCategory);
+    backToCategory.addEventListener("click", () => {
+      backToCategories();
+    });
+  };
+
+  let backToCategories = () => {
+    mealRecipes.classList.remove("divOn");
+    mealRecipes.classList.add("divOff");
+    categories.classList.remove("divOff");
+    categories.classList.add("divOn");
+
+    while (mealRecipes.firstChild) {
+      mealRecipes.removeChild(mealRecipes.firstChild);
+    }
+  };
+
+  let backToActv = (backToCategory) => {
+    console.log("back to activ");
+    categories.appendChild(backToCategory);
+    backToCategory.addEventListener("click", () => {
+      backToActivities();
+    });
+  };
+
+  let backToActivities = () => {
+    console.log("back");
+    categories.classList.remove("divOn");
+    categories.classList.add("divOff");
+    activities.classList.remove("divOff");
+    activities.classList.add("divOn");
+  };
+
+  let backToActive = (backToCategory) => {
+    console.log("back from search");
+    search.appendChild(backToCategory);
+    backToCategory.addEventListener("click", () => {
+      backToActiv();
+    });
+  };
+
+  let backToActiv = () => {
+    search.classList.remove("divOn");
+    search.classList.add("divOff");
+    activities.classList.remove("divOff");
+    activities.classList.add("divOn");
   };
 
   //*SHOW RECIPE INSTRUCTIONS
@@ -192,7 +258,6 @@ document.addEventListener("DOMContentLoaded", () => {
       }
     });
 
-    //p.innerHTML = mealDetail.strInstructions;
     ingredientsList(mealDetail);
   };
 
@@ -212,42 +277,50 @@ document.addEventListener("DOMContentLoaded", () => {
         ? measureList.push(elmt)
         : "";
     });
-    //console.log(ingrList, measureList);
 
     for (let i = 0; i < ingrList.length; i++) {
-      ingrList[i].includes("")
+      ingrList[i].includes("") ||
+      ingrList[i].includes(null) ||
+      ingrList[i].includes(" ")
         ? ingrList.splice(ingrList.indexOf(ingrList[i]))
         : "";
     }
 
     for (let i = 0; i < measureList.length; i++) {
-      measureList[i].includes("")
+      measureList[i].includes("") ||
+      measureList[i].includes(null) ||
+      measureList[i].includes(" ")
         ? measureList.splice(measureList.indexOf(measureList[i]))
         : "";
     }
 
     for (let i = 0; i < ingrList.length; i++) {
-      //console.log(ingrList[i], measureList[i]);
       ingrMeas.push(ingrList[i][1].concat(" ", measureList[i][1]));
     }
 
     list.appendChild(ingrListTitle);
-    //console.log(ingrMeas);
     showMeasures(ingrMeas);
   };
 
   //*SHOW MEASURES
   let showMeasures = (ingrMeas) => {
-    console.log(ingrMeas);
     let ul = document.createElement("ul");
     ingrMeas.forEach((elmt) => {
       let li = document.createElement("li");
       li.innerHTML = elmt;
       ul.appendChild(li);
     });
-
     list.appendChild(ul);
   };
+
+  //* RELOAD PAGE
+  headerLogo.addEventListener(
+    "click",
+    (pageReload = () => {
+      console.log("reload clicked");
+      window.location.reload();
+    })
+  );
 
   //* HIDE WELCOME DIV
   welcomeDiv.addEventListener(
@@ -267,7 +340,6 @@ document.addEventListener("DOMContentLoaded", () => {
 
   //*SHOW CATEGORIES
   activitiesCategories.addEventListener("click", () => {
-    //* DOWNLOADS CATEGORIES FROM API
     fetch(CATEGORIES_URL)
       .then((res) => res.json())
       .then((data) => {
@@ -275,18 +347,23 @@ document.addEventListener("DOMContentLoaded", () => {
           createCard(category);
         });
       });
-    //console.log("categories clicked");
     activities.classList.add("divOff");
     categories.classList.remove("divOff");
     categories.classList.add("divOn");
+
+    let parentInfo = activitiesCategories.parentElement.classList[0];
+    backButton(parentInfo);
   });
 
   //*SHOW SEARCH
-  activitiesSearch.addEventListener("click", () => {
-    console.log("search clicked");
+  activitiesSearch.addEventListener("click", (e) => {
+    let parentInfo = e.target.className;
+
     activities.classList.add("divOff");
     search.classList.remove("divOff");
     search.classList.add("divOn");
+
+    backButton(parentInfo);
   });
 
   //*SEARCH RECIPE BY NAME
@@ -305,7 +382,6 @@ document.addEventListener("DOMContentLoaded", () => {
       fetch(`https://www.themealdb.com/api/json/v1/1/search.php?s=${mealName}`)
         .then((res) => res.json())
         .then((data) => {
-          //console.log(data.meals);
           if (data.meals === null) {
             inputSearch.value = "";
             mealsList.shift();
@@ -324,7 +400,6 @@ document.addEventListener("DOMContentLoaded", () => {
           mealsList[0].map((meal) => {
             createCardMeal(meal);
             inputSearch.value = "";
-            //console.log(mealsList);
           });
         });
     }
