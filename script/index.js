@@ -14,6 +14,7 @@ document.addEventListener("DOMContentLoaded", () => {
   const recipeTitle = document.querySelector(".recipeTitle");
   const searchTitle = document.querySelector(".searchTitle");
   const search = document.querySelector(".search");
+  const inputDiv = document.querySelector(".inputDiv");
   const inputSearch = document.querySelector(".inputSearch");
   const inputHeader = document.querySelector(".inputHeader");
   const bgPhoto = document.querySelector(".backgroundPhoto");
@@ -370,7 +371,7 @@ document.addEventListener("DOMContentLoaded", () => {
   inputSearch.addEventListener("keyup", (e) => {
     mealName = e.target.value;
     if (e.keyCode === 13 && inputSearch.value !== "") {
-      inputHeader.appendChild(inputSearch);
+      inputHeader.appendChild(inputDiv);
       inputHeader.classList.remove("divOff");
       top.classList.add("topInput");
       mealRecipes.classList.remove("divOff");
