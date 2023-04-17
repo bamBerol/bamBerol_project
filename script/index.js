@@ -1,5 +1,6 @@
 document.addEventListener("DOMContentLoaded", () => {
   const headerLogo = document.querySelector(".headerLogo");
+  const loader = document.querySelector(".loader");
   const categories = document.querySelector(".categories");
   const welcomeDiv = document.querySelector(".welcome");
   const top = document.querySelector(".top");
@@ -105,11 +106,24 @@ document.addEventListener("DOMContentLoaded", () => {
     mealRecipes.classList.remove("divOff");
     mealRecipes.classList.add("divOn");
 
+    if (mealRecipes.hasChildNodes()) {
+      mealRecipes.innerHTML = "";
+      loader.classList.remove("divOff");
+      loader.classList.add("divOn");
+      mealRecipes.appendChild(loader);
+    } else {
+      loader.classList.remove("divOff");
+      loader.classList.add("divOn");
+      mealRecipes.appendChild(loader);
+    }
+
     fetch(
       `https://www.themealdb.com/api/json/v1/1/filter.php?c=${category.strCategory}`
     )
       .then((res) => res.json())
       .then((data) => {
+        loader.classList.remove("divOn");
+        loader.classList.add("divOf");
         console.log(data.meals);
         if (categoryMeals === []) {
           categoryMeals.push(data.meals);
@@ -199,6 +213,7 @@ document.addEventListener("DOMContentLoaded", () => {
   };
 
   let backToCategories = () => {
+    mealRecipes.innerHTML = "";
     mealRecipes.classList.remove("divOn");
     mealRecipes.classList.add("divOff");
     categories.classList.remove("divOff");
@@ -210,7 +225,7 @@ document.addEventListener("DOMContentLoaded", () => {
   };
 
   let backToActv = (backToCategory) => {
-    console.log("back to activ");
+    console.log(backToCategory);
     categories.appendChild(backToCategory);
     backToCategory.addEventListener("click", () => {
       backToActivities();
@@ -219,6 +234,7 @@ document.addEventListener("DOMContentLoaded", () => {
 
   let backToActivities = () => {
     console.log("back");
+    categories.innerHTML = "";
     categories.classList.remove("divOn");
     categories.classList.add("divOff");
     activities.classList.remove("divOff");
@@ -234,6 +250,7 @@ document.addEventListener("DOMContentLoaded", () => {
   };
 
   let backToActiv = () => {
+    search.removeChild(search.lastChild);
     search.classList.remove("divOn");
     search.classList.add("divOff");
     activities.classList.remove("divOff");
@@ -264,53 +281,61 @@ document.addEventListener("DOMContentLoaded", () => {
 
   //* SHOW INGREDIENTS LIST
   let ingredientsList = (mealDetail) => {
-    let ingrList = [];
-    let measureList = [];
-    let ingrMeas = [];
-
     let ingrListTitle = document.createElement("h3");
     ingrListTitle.innerHTML = "Ingredients:";
 
-    Object.entries(mealDetail).forEach((elmt) => {
-      elmt[0].includes("strIngredient")
-        ? ingrList.push(elmt)
-        : elmt[0].includes("strMeasure")
-        ? measureList.push(elmt)
-        : "";
+    let ingredients = Object.keys(mealDetail).filter((el) =>
+      el.includes("Ingredient")
+    );
+
+    let filterIngredients = Object.keys(mealDetail)
+      .filter((key) => ingredients.includes(key))
+      .reduce((obj, key) => {
+        obj[key] = mealDetail[key];
+        return obj;
+      }, {});
+
+    let nameOfIngredient = Object.values(filterIngredients).filter(
+      (n) => n !== ""
+    );
+
+    let measures = Object.keys(mealDetail).filter((el) =>
+      el.includes("Measure")
+    );
+
+    let filterMeasure = Object.keys(mealDetail)
+      .filter((key) => measures.includes(key))
+      .reduce((obj, key) => {
+        obj[key] = mealDetail[key];
+        return obj;
+      }, {});
+
+    let quantity = Object.values(filterMeasure).filter(
+      (q) => q !== " " && q !== null
+    );
+
+    let quantityOfIngredients = quantity.map((value, i) => {
+      return nameOfIngredient[i] + " " + value;
     });
 
-    for (let i = 0; i < ingrList.length; i++) {
-      ingrList[i].includes("") ||
-      ingrList[i].includes(null) ||
-      ingrList[i].includes(" ")
-        ? ingrList.splice(ingrList.indexOf(ingrList[i]))
-        : "";
-    }
-
-    for (let i = 0; i < measureList.length; i++) {
-      measureList[i].includes("") ||
-      measureList[i].includes(null) ||
-      measureList[i].includes(" ")
-        ? measureList.splice(measureList.indexOf(measureList[i]))
-        : "";
-    }
-
-    for (let i = 0; i < ingrList.length; i++) {
-      ingrMeas.push(ingrList[i][1].concat(" ", measureList[i][1]));
-    }
+    quantityOfIngredients.splice(quantityOfIngredients.indexOf("null "));
+    quantityOfIngredients.splice(quantityOfIngredients.indexOf("undefined "));
 
     list.appendChild(ingrListTitle);
-    showMeasures(ingrMeas);
+    showMeasures(quantityOfIngredients);
   };
 
   //*SHOW MEASURES
   let showMeasures = (ingrMeas) => {
+    console.log(ingrMeas);
     let ul = document.createElement("ul");
-    ingrMeas.forEach((elmt) => {
-      let li = document.createElement("li");
-      li.innerHTML = elmt;
-      ul.appendChild(li);
-    });
+    if (ingrMeas !== "undefined ") {
+      ingrMeas.forEach((elmt) => {
+        let li = document.createElement("li");
+        li.innerHTML = elmt;
+        ul.appendChild(li);
+      });
+    }
     list.appendChild(ul);
   };
 
@@ -341,9 +366,14 @@ document.addEventListener("DOMContentLoaded", () => {
 
   //*SHOW CATEGORIES
   activitiesCategories.addEventListener("click", () => {
+    categories.appendChild(loader);
+    loader.classList.remove("divOff");
+    loader.classList.add("divOn");
     fetch(CATEGORIES_URL)
       .then((res) => res.json())
       .then((data) => {
+        loader.classList.remove("divOn");
+        loader.classList.add("divOff");
         data.categories.map((category) => {
           createCard(category);
         });
@@ -380,9 +410,22 @@ document.addEventListener("DOMContentLoaded", () => {
       search.classList.remove("divOn");
       search.classList.add("divOff");
 
+      if (mealRecipes.hasChildNodes()) {
+        mealRecipes.innerHTML = "";
+        loader.classList.remove("divOff");
+        loader.classList.add("divOn");
+        mealRecipes.appendChild(loader);
+      } else {
+        loader.classList.remove("divOff");
+        loader.classList.add("divOn");
+        mealRecipes.appendChild(loader);
+      }
+
       fetch(`https://www.themealdb.com/api/json/v1/1/search.php?s=${mealName}`)
         .then((res) => res.json())
         .then((data) => {
+          loader.classList.remove("divOn");
+          loader.classList.add("divOff");
           if (data.meals === null) {
             inputSearch.value = "";
             mealsList.shift();
