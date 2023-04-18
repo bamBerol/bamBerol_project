@@ -38,7 +38,6 @@ document.addEventListener("DOMContentLoaded", () => {
     categoryCard.setAttribute("id", `${category.idCategory}`);
     categoryCard.classList.add("categoryCard");
     categoryCard.classList.add("centerFlex");
-    categoryCard.classList.add("showCard");
 
     let categoryTitle = document.createElement("div");
     categoryTitle.classList.add("categoryTitle");

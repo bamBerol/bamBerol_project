@@ -310,6 +310,7 @@ body {
   flex: 4;
   padding: 1.5rem;
   font-size: 1.2rem;
+  color: var(--blue);
 }
 
 .ingredients {
@@ -317,7 +318,9 @@ body {
   font-size: 0.9rem;
   font-style: italic;
   padding: 1.5rem;
+  padding-right: 1.5rem;
   padding-right: 0;
+  color: var(--blue);
 }
 
 .ingredientsList h3,
@@ -400,4 +403,77 @@ body {
 
 .divOff {
   display: none;
+}
+
+@media screen and (max-width: 768px) {
+  .welcomeLogoDiv img {
+    width: 18rem;
+    height: 18rem;
+  }
+
+  .container {
+    height: 100%;
+    width: 100%;
+    padding: 0;
+    overflow: hidden;
+    /*overflow-x: hidden;*/
+  }
+
+  .activitiesOption {
+    margin: 0;
+    flex-direction: column;
+  }
+
+  .activitiesSearch,
+  .activitiesCategories {
+    width: 90%;
+    height: 12rem;
+    margin: 1.5rem 0;
+    font-size: 1.5rem;
+  }
+
+  .categories {
+    margin: 0;
+  }
+
+  .categoryTitle {
+    font-size: 1.5rem;
+  }
+
+  .recipe {
+    border-radius: 0;
+  }
+
+  .recipeTitle > h2 {
+    font-size: 1.5rem;
+    text-align: center;
+  }
+
+  .recipeDetailInstr {
+    flex-direction: column
+  }
+
+  .ingredients {
+    padding-right: 1.5rem;
+
+  }
+
+  .ingredientsList > ul > li {
+    align-item;
+    width: 80%;
+    padding: 0.6rem 0;
+    margin: 0 auto;
+  }
+
+  .back {
+    top: -1.5rem;
+    left: -1.2rem;
+  }
+
+  .backBtn {
+    position: fixed;
+    top: 1.5rem;
+    left: 1rem;
+    padding: 0.5rem;
+  }
 }
