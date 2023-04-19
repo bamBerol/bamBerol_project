@@ -262,6 +262,7 @@ body {
 .recipeDetailTitle {
   position: relative;
   padding: 1.5rem;
+  padding-top: 3rem;
 }
 
 .recipeTitle {
@@ -334,7 +335,7 @@ body {
 
 .ingredientsList > ul > li {
   width: 80%;
-  padding: 0.6rem 0;
+  padding: 1rem 0;
   margin-bottom: 0.3rem;
   border-bottom: 1px solid var(--blue);
 }
@@ -359,7 +360,7 @@ body {
 .back {
   position: absolute;
   padding: 0.5rem;
-  top: 0;
+  top: -1.5rem;
   left: 0;
   border-radius: 50%;
   color: var(--blue);
@@ -404,11 +405,60 @@ body {
 .divOff {
   display: none;
 }
+/*
+@media screen and (max-width: 576px) {
+  .welcomeLogoDiv img {
+    width: 15rem;
+    height: 15rem;
+  }
 
-@media screen and (max-width: 768px) {
+  .activitiesOption {
+    margin: 0;
+    flex-direction: column;
+  }
+
+  .activitiesSearch,
+  .activitiesCategories {
+    width: 100%;
+    height: 10rem;
+    margin: 1.5rem 0;
+    font-size: 1.5rem;
+  }
+}
+*/
+@media screen /* and (min-width: 576px) */and (max-width: 768px) {
   .welcomeLogoDiv img {
     width: 18rem;
     height: 18rem;
+  }
+
+  .top {
+    width: 100%;
+    padding: 0.8rem 1rem;
+  }
+
+  .headerLogo {
+    width: 2.5rem;
+    height: 2.5rem;
+  }
+
+  .inputHeader {
+    align-items: center;
+    width: 80%;
+  }
+
+  .search {
+    width: 80%;
+  }
+
+  .inputSearch {
+    width: 85%;
+  }
+
+  .inputDiv {
+    width: 100%;
+    padding: 0.5rem 1rem;
+    border-radius: 1.5rem;
   }
 
   .container {
@@ -441,7 +491,10 @@ body {
   }
 
   .recipe {
+    flex-direction: column;
+    width: 100%;
     border-radius: 0;
+    overflow-y: scroll;
   }
 
   .recipeTitle > h2 {
@@ -449,30 +502,37 @@ body {
     text-align: center;
   }
 
+  .recipeDetailTitle {
+    padding-top: 3rem;
+  }
+
   .recipeDetailInstr {
-    flex-direction: column
+    flex-direction: column;
   }
 
   .ingredients {
     padding-right: 1.5rem;
+    padding-bottom: 0;
+  }
 
+  .ingredientsList h3,
+  .instructionsDetail h3 {
+    margin-bottom: 2rem;
   }
 
   .ingredientsList > ul > li {
-    align-item;
-    width: 80%;
-    padding: 0.6rem 0;
+    padding: 1rem 0;
     margin: 0 auto;
   }
 
   .back {
-    top: -1.5rem;
-    left: -1.2rem;
+    top: -2rem;
+    left: -0.5rem;
   }
 
   .backBtn {
     position: fixed;
-    top: 1.5rem;
+    top: 1rem;
     left: 1rem;
     padding: 0.5rem;
   }
