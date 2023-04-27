@@ -10,6 +10,7 @@ document.addEventListener("DOMContentLoaded", () => {
   const activities = document.querySelector(".activities");
   const mealRecipes = document.querySelector(".mealRecipes");
   const recipe = document.querySelector(".recipe");
+  const recipeDetailInstr = document.querySelector(".recipeDetailInstr");
   const instructionsDetail = document.querySelector(".instructionsDetail");
   const list = document.querySelector(".ingredientsList");
   const recipeTitle = document.querySelector(".recipeTitle");
@@ -87,7 +88,7 @@ document.addEventListener("DOMContentLoaded", () => {
     mealCard.appendChild(mealTitle);
     mealRecipes.appendChild(mealCard);
 
-    mealCard.addEventListener("click", () => {
+    mealCard.addEventListener("click", (e) => {
       fetch(
         `https://www.themealdb.com/api/json/v1/1/search.php?s=${mealsList.strMeal}`
       )
@@ -95,6 +96,8 @@ document.addEventListener("DOMContentLoaded", () => {
         .then((data) => {
           mealDetail(data.meals[0]);
         });
+
+      e.preventDefault();
     });
   };
 
@@ -134,8 +137,10 @@ document.addEventListener("DOMContentLoaded", () => {
         categoryMeals[0].map((meal) => {
           createCardMeal(meal);
         });
+
         let info =
           document.querySelector(".categoryCard").parentElement.classList[0];
+
         backButton(info);
       });
   };
@@ -258,6 +263,7 @@ document.addEventListener("DOMContentLoaded", () => {
 
   //*SHOW RECIPE INSTRUCTIONS
   let showInstr = (mealDetail) => {
+    recipeDetailInstr.scrollTo(0, 0);
     console.log("instr show", mealDetail);
     let instr = document.querySelector(".instructionsDetail");
     let prepTitle = document.createElement("h3");
@@ -405,9 +411,23 @@ document.addEventListener("DOMContentLoaded", () => {
       top.classList.add("topInput");
       mealRecipes.classList.remove("divOff");
       mealRecipes.classList.add("divOn");
+      recipe.classList.remove("divOn");
+      recipe.classList.add("divOff");
       searchTitle.classList.add("divOff");
       search.classList.remove("divOn");
       search.classList.add("divOff");
+
+      if (
+        document.querySelector(".ingredientsList").hasChildNodes() &&
+        document.querySelector(".instructionsDetail").hasChildNodes() &&
+        document.querySelector(".recipeTitle").hasChildNodes()
+      ) {
+        console.log("maja childa");
+        document.querySelector(".ingredientsList").innerHTML = "";
+        document.querySelector(".instructionsDetail").innerHTML = "";
+        document.querySelector(".recipeTitle").innerHTML = "";
+      } else {
+      }
 
       if (mealRecipes.hasChildNodes()) {
         mealRecipes.innerHTML = "";
